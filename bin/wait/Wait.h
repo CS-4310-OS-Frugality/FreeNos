@@ -1,3 +1,6 @@
+#ifndef __BIN_WAIT_WAIT_H
+#define __BIN_WAIT_WAIT_H
+
 #include <POSIXApplication.h>
 
 class Wait : public POSIXApplication
@@ -24,3 +27,5 @@ class Wait : public POSIXApplication
      */
     virtual Result exec();
 };
+
+#endif /* __BIN_WAIT_WAIT_H */

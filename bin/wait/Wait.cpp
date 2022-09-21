@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#include <unistd.h>
 #include "Wait.h"
 #include <Types.h>
+#include <unistd.h>
 
 Wait::Wait(int argc, char **argv): POSIXApplication(argc, argv){
     parser().setDescription("Wait until another process finishes execution");
