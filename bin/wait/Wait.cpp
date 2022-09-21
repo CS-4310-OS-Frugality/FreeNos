@@ -23,10 +23,9 @@ Wait::Result Wait::exec(){
         return InvalidArgument;
     }
 
-    // Sleep now
     if (wait(id) != 0)
     {
-        ERROR("failed to sleep: " << strerror(errno));
+        ERROR("failed to wait: " << strerror(errno));
         return IOError;
     }
 }
