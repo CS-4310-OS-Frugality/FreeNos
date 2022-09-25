@@ -4,7 +4,7 @@
 #include <errno.h>
 #include "Wait.h"
 #include <Types.h>
-#include <unistd.h>
+#include "sys/wait.h"
 
 Wait::Wait(int argc, char **argv): POSIXApplication(argc, argv){
     parser().setDescription("Wait until another process finishes execution");
@@ -15,7 +15,8 @@ Wait::~Wait(){
 }
 
 Wait::Result Wait::exec(){
-    ProcessID id = 0;
+    pid_t id = 0;
+    int status;
 
     if ((id = atoi(arguments().get("process_id"))) <= 0)
     {
@@ -23,7 +24,7 @@ Wait::Result Wait::exec(){
         return InvalidArgument;
     }
 
-    if (wait(id) != 0)
+    if (waitpid(id, &status, 0) != id)
     {
         ERROR("failed to wait: " << strerror(errno));
         return IOError;
