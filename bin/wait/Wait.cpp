@@ -18,7 +18,7 @@ Wait::Result Wait::exec(){
     pid_t id = 0;
     int status;
 
-    if ((id = atoi(arguments().get("process_id"))) <= 0)
+    if ((id = atoi(arguments().get("process_id"))) < 0)
     {
         ERROR("invalid process id `" << arguments().get("process_id") << "'");
         return InvalidArgument;
