@@ -23,7 +23,8 @@
 #include "Process.h"
 #include "ProcessEvent.h"
 
-Process::Process(ProcessID id, Address entry, bool privileged, const MemoryMap &map)
+Process::Process(ProcessID id, Address entry, bool privileged, const MemoryMap &map,
+                 unsigned int priority)
     : m_id(id), m_map(map), m_shares(id)
 {
     m_state         = Stopped;
@@ -35,6 +36,7 @@ Process::Process(ProcessID id, Address entry, bool privileged, const MemoryMap &
     m_privileged    = privileged;
     m_memoryContext = ZERO;
     m_kernelChannel = ZERO;
+    priority        = 3;
     MemoryBlock::set(&m_sleepTimer, 0, sizeof(m_sleepTimer));
 }
 

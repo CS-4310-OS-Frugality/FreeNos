@@ -26,7 +26,7 @@ Scheduler::Scheduler()
 
 Size Scheduler::count(int priority) const
 {
-    return m_queue[priority].count();
+    return m_queue[priority - 1].count();
 }
 
 Scheduler::Result Scheduler::enqueue(Process *proc, bool ignoreState)
