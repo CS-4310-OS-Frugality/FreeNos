@@ -74,6 +74,11 @@ API::Result ProcessCtlHandler(const ProcessID procID,
         procs->schedule();
         break;
 
+    case SetPrioPID:
+        proc->setPriority(info->priority);
+        procs->schedule();
+        break;
+
     case Stop:
         if (procs->stop(proc) != ProcessManager::Success)
         {
@@ -189,6 +194,7 @@ Log & operator << (Log &log, ProcessOperation op)
     {
         case Spawn:     log.append("Spawn"); break;
         case KillPID:   log.append("KillPID"); break;
+        case SetPrioPID: log.append("SetPrioPID"); break;
         case GetPID:    log.append("GetPID"); break;
         case GetParent: log.append("GetParent"); break;
         case WatchIRQ:  log.append("WatchIRQ"); break;

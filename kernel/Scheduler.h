@@ -58,7 +58,7 @@ class Scheduler
      *
      * @return Number of processes on the schedule
      */
-    Size count(int priority) const;
+    Size count() const;
 
     /**
      * Add a Process to the run schedule.
@@ -90,7 +90,7 @@ class Scheduler
   private:
 
     /** Contains processes ready to run */
-    Queue<Process *, MAX_PROCS> m_queue [5];
+    Queue<Process *, MAX_PROCS> m_queue;
 
     /*
       Array of 5 different levels

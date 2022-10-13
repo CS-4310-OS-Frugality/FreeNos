@@ -149,6 +149,12 @@ class Process
      */
     bool operator == (Process *proc);
 
+    // Set priority of process
+    void setPriority(unsigned int prio);
+
+    // Get priority of process
+    unsigned int getPriority();
+
   protected:
 
     /**
@@ -241,12 +247,6 @@ class Process
      */
     void setParent(ProcessID id);
 
-    // Set priority of process
-    void setPriority(unsigned int prio);
-
-    // Get priority of process
-    unsigned int getPriority();
-
   protected:
 
     /** Process Identifier */
@@ -292,8 +292,8 @@ class Process
     /** Channel for sending kernel events to the Process */
     MemoryChannel *m_kernelChannel;
 
-    /** Priority Number **/
-    unsigned int priority;
+    /** Priority Level **/
+    unsigned int m_priority;
 };
 
 /**
