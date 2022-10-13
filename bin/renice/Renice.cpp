@@ -35,8 +35,7 @@ Renice::Renice(int argc, char **argv)
 Renice::~Renice() {
 }
 
-Renice::Result Renice::exec()
-{
+Renice::Result Renice::exec(){
 
     pid_t pid = atoi(arguments().get("process_id"));
     unsigned int priority = atoi(arguments().get("priority"));

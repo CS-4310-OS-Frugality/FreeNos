@@ -75,7 +75,7 @@ API::Result ProcessCtlHandler(const ProcessID procID,
         break;
 
     case SetPrioPID:
-        proc->setPriority(info->priority);
+        proc->setPriority(info->state);
         procs->schedule();
         break;
 
