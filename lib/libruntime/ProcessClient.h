@@ -66,9 +66,6 @@ class ProcessClient
 
         /** Textual state of the process */
         String textState;
-
-        /** The priority level of the process */
-        unsigned int priority;
     }
     Info;
 
