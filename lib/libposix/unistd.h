@@ -54,6 +54,8 @@
  */
 extern C pid_t getpid();
 
+extern pid_t renice(pid_t pid, unsigned int priority);
+
 /**
  * Get parent process ID.
  *
