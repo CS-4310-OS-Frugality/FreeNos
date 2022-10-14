@@ -209,7 +209,7 @@ class ProcessManager
      */
     Process * current();
 
-  private:
+  public:
 
     /**
      * Place the given process on the Schedule queue

@@ -75,8 +75,14 @@ API::Result ProcessCtlHandler(const ProcessID procID,
         break;
 
     case SetPrioPID:
+        if(proc->getState() == Process::Ready)
+            procs->dequeueProcess(proc, true);
+
         proc->setPriority(info->state);
-        procs->schedule();
+
+        if(proc->getState() == Process::Ready)
+            procs->enqueueProcess(proc, true);
+
         break;
 
     case Stop:
