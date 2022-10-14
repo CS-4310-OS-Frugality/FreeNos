@@ -40,7 +40,7 @@ Renice::Result Renice::exec(){
     pid_t pid = atoi(arguments().get("process_id"));
     unsigned int priority = atoi(arguments().get("priority"));
 
-    if (priority > 5 || priority < 1){
+    if (priority < 1 || priority > 5){
         ERROR("invalid priority level `" << priority << "'");
         return InvalidArgument;
     }
@@ -50,11 +50,24 @@ Renice::Result Renice::exec(){
         return InvalidArgument;
     }
 
-    if (renice(pid, priority) != pid)
-    {
-        ERROR("renice failed: " << strerror(errno));
-        return IOError;
-    }
+    ProcessInfo *info = new ProcessInfo();
+    info->priority = priority;
 
-    return Success;
+    const ulong result = (ulong) ProcessCtl(pid, SetPrioPID, (Address) &info);
+
+    switch ((const API::Result) (result & 0xffff))
+    {
+        case API::NotFound:
+            errno = ESRCH;
+            ERROR("renice failed: " << strerror(errno));
+            return IOError;
+
+        case API::Success:
+            return Success;
+
+        default:
+            errno = EIO;
+            ERROR("renice failed: " << strerror(errno));
+            return IOError;
+    }
 }
