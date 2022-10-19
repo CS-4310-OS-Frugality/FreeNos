@@ -13,7 +13,7 @@ pid_t setprio(pid_t pid, unsigned int priority, int options)
     const ProcessClient::Result result = process.processInfo(pid, info);
     if (result == ProcessClient::Success)
     {
-        info.kernelState->priority = priority
+        info.kernelState.priority = priority
 
         const ulong result = (ulong) ProcessCtl(pid, SetPrioPID, (Address) &info.kernelState);
 

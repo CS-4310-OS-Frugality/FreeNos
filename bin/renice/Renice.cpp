@@ -50,7 +50,7 @@ Renice::Result Renice::exec(){
         return InvalidArgument;
     }
 
-    if (setprio(pid, priority, 0) != id)
+    if (setprio(pid, priority, 0) != pid)
     {
         ERROR("renice failed: " << strerror(errno));
         return IOError;
