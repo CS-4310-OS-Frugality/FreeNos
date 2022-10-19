@@ -78,7 +78,7 @@ API::Result ProcessCtlHandler(const ProcessID procID,
         if(proc->getState() == Process::Ready)
             procs->dequeueProcess(proc, true);
 
-        proc->setPriority(info->state);
+        proc->setPriority(info->priority);
 
         if(proc->getState() == Process::Ready)
             procs->enqueueProcess(proc, true);

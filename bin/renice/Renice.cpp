@@ -22,7 +22,7 @@
 #include <unistd.h>
 #include <FreeNOS/User.h>
 #include "Renice.h"
-
+#include "sys/prio.h"
 
 Renice::Renice(int argc, char **argv)
     : POSIXApplication(argc, argv)
@@ -50,24 +50,9 @@ Renice::Result Renice::exec(){
         return InvalidArgument;
     }
 
-    ProcessInfo *info = new ProcessInfo();
-    info->priority = priority;
-
-    const ulong result = (ulong) ProcessCtl(pid, SetPrioPID, (Address) &info);
-
-    switch ((const API::Result) (result & 0xffff))
+    if (setprio(pid, priority, 0) != id)
     {
-        case API::NotFound:
-            errno = ESRCH;
-            ERROR("renice failed: " << strerror(errno));
-            return IOError;
-
-        case API::Success:
-            return Success;
-
-        default:
-            errno = EIO;
-            ERROR("renice failed: " << strerror(errno));
-            return IOError;
+        ERROR("renice failed: " << strerror(errno));
+        return IOError;
     }
 }
