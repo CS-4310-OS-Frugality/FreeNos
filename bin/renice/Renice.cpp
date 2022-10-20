@@ -22,7 +22,6 @@
 #include <unistd.h>
 #include <FreeNOS/User.h>
 #include "Renice.h"
-#include "sys/prio.h"
 
 Renice::Renice(int argc, char **argv)
     : POSIXApplication(argc, argv)
