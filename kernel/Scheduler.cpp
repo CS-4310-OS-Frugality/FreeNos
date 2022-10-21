@@ -73,11 +73,11 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
 }
 
 Process * Scheduler::select(){
-    for (int i = 0; i < 5; i++){
-        if (m_queue[i].count() > 0)
+    for (int i = 5; i > 0; i--){
+        if (m_queue[i-1].count() > 0)
         {
-            Process *p = m_queue[i].pop();
-            m_queue[i].push(p);
+            Process *p = m_queue[i-1].pop();
+            m_queue[i-1].push(p);
             return p;
         }
     }
